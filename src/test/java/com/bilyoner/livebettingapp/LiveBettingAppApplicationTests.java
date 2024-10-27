@@ -1,4 +1,4 @@
-package com.example.livebettingapp;
+package com.bilyoner.livebettingapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
