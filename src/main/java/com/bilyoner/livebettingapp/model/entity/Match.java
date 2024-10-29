@@ -26,6 +26,9 @@ public class Match {
     @Column(name = "home_odds")
     private float homeOdds;
 
+    @Column(name = "draw_odds")
+    private float drawOdds;
+
     @Column(name = "away_odds")
     private float awayOdds;
 
@@ -72,6 +75,14 @@ public class Match {
         this.homeOdds = homeOdds;
     }
 
+    public float getDrawOdds() {
+        return drawOdds;
+    }
+
+    public void setDrawOdds(float drawOdds) {
+        this.drawOdds = drawOdds;
+    }
+
     public float getAwayOdds() {
         return awayOdds;
     }
@@ -110,6 +121,7 @@ public class Match {
         private String homeTeam;
         private String awayTeam;
         private float homeOdds;
+        private float drawOdds;
         private float awayOdds;
         private Date matchTime;
 
@@ -145,6 +157,11 @@ public class Match {
             return this;
         }
 
+        public MatchBuilder drawOdds(float drawOdds) {
+            this.drawOdds = drawOdds;
+            return this;
+        }
+
         public MatchBuilder awayOdds(float awayOdds) {
             this.awayOdds = awayOdds;
             return this;
@@ -156,16 +173,16 @@ public class Match {
         }
 
         public Match build() {
-            Match Match = new Match();
-            Match.setId(id);
-            Match.setLeague(league);
-            Match.setHomeTeam(homeTeam);
-            Match.setAwayTeam(awayTeam);
-            Match.setHomeOdds(homeOdds);
-            Match.setAwayOdds(awayOdds);
-            Match.setMatchTime(matchTime);
-
-            return Match;
+            Match match = new Match();
+            match.setId(id);
+            match.setLeague(league);
+            match.setHomeTeam(homeTeam);
+            match.setAwayTeam(awayTeam);
+            match.setHomeOdds(homeOdds);
+            match.setDrawOdds(drawOdds);
+            match.setAwayOdds(awayOdds);
+            match.setMatchTime(matchTime);
+            return match;
         }
     }
 }

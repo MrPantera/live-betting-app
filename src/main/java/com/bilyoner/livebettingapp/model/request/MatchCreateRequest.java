@@ -13,6 +13,7 @@ public class MatchCreateRequest {
     private String homeTeam;
     private String awayTeam;
     private float homeOdds;
+    private float drawOdds;
     private float awayOdds;
     private Date matchTime;
 
@@ -22,6 +23,7 @@ public class MatchCreateRequest {
                 .homeTeam(homeTeam)
                 .awayTeam(awayTeam)
                 .homeOdds(homeOdds)
+                .drawOdds(drawOdds)
                 .awayOdds(awayOdds)
                 .matchTime(matchTime)
                 .build();
@@ -59,6 +61,14 @@ public class MatchCreateRequest {
         this.homeOdds = homeOdds;
     }
 
+    public float getDrawOdds() {
+        return drawOdds;
+    }
+
+    public void setDrawOdds(float drawOdds) {
+        this.drawOdds = drawOdds;
+    }
+
     public float getAwayOdds() {
         return awayOdds;
     }
@@ -77,18 +87,18 @@ public class MatchCreateRequest {
 
 
     public static final class MatchCreateRequestBuilder {
-
         private String league;
         private String homeTeam;
         private String awayTeam;
         private float homeOdds;
+        private float drawOdds;
         private float awayOdds;
         private Date matchTime;
 
         private MatchCreateRequestBuilder() {
         }
 
-        public static MatchCreateRequestBuilder anMatchCreateRequest() {
+        public static MatchCreateRequestBuilder aMatchCreateRequest() {
             return new MatchCreateRequestBuilder();
         }
 
@@ -112,6 +122,11 @@ public class MatchCreateRequest {
             return this;
         }
 
+        public MatchCreateRequestBuilder drawOdds(float drawOdds) {
+            this.drawOdds = drawOdds;
+            return this;
+        }
+
         public MatchCreateRequestBuilder awayOdds(float awayOdds) {
             this.awayOdds = awayOdds;
             return this;
@@ -128,10 +143,10 @@ public class MatchCreateRequest {
             matchCreateRequest.setHomeTeam(homeTeam);
             matchCreateRequest.setAwayTeam(awayTeam);
             matchCreateRequest.setHomeOdds(homeOdds);
+            matchCreateRequest.setDrawOdds(drawOdds);
             matchCreateRequest.setAwayOdds(awayOdds);
             matchCreateRequest.setMatchTime(matchTime);
             return matchCreateRequest;
         }
     }
-
 }

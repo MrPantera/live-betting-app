@@ -75,7 +75,7 @@ public class Player {
         private String surname;
         private float accountBalance;
 
-        private PlayerBuilder() {
+        public PlayerBuilder() {
         }
 
         public static PlayerBuilder aPlayer() {

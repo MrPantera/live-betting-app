@@ -14,13 +14,13 @@ public class Bet {
 
     @ManyToOne
     @JoinColumn(name = "match_bet", referencedColumnName = "id")
-    private Match match;
+    private MatchHistory matchHistory;
 
     @Column(name = "prediction")
     private String prediction;
 
     @Column(name = "odds")
-    private String odds;
+    private Float odds;
 
     public Long getId() {
         return id;
@@ -30,12 +30,12 @@ public class Bet {
         this.id = id;
     }
 
-    public Match getMatch() {
-        return match;
+    public MatchHistory getMatchHistory() {
+        return matchHistory;
     }
 
-    public void setMatch(Match match) {
-        this.match = match;
+    public void setMatchHistory(MatchHistory matchHistory) {
+        this.matchHistory = matchHistory;
     }
 
     public String getPrediction() {
@@ -46,11 +46,11 @@ public class Bet {
         this.prediction = prediction;
     }
 
-    public String getOdds() {
+    public Float getOdds() {
         return odds;
     }
 
-    public void setOdds(String odds) {
+    public void setOdds(Float odds) {
         this.odds = odds;
     }
 
@@ -62,19 +62,19 @@ public class Bet {
 
         Bet bet = (Bet) o;
 
-        return new EqualsBuilder().append(getId(), bet.getId()).append(getMatch(), bet.getMatch()).append(getPrediction(), bet.getPrediction()).append(getOdds(), bet.getOdds()).isEquals();
+        return new EqualsBuilder().append(getId(), bet.getId()).append(getMatchHistory(), bet.getMatchHistory()).append(getPrediction(), bet.getPrediction()).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(getId()).append(getMatch()).append(getPrediction()).append(getOdds()).toHashCode();
+        return new HashCodeBuilder(17, 37).append(getId()).append(getMatchHistory()).append(getPrediction()).toHashCode();
     }
 
     public static final class BetBuilder {
         private Long id;
-        private Match match;
+        private MatchHistory matchHistory;
         private String prediction;
-        private String odds;
+        private Float odds;
 
         private BetBuilder() {
         }
@@ -88,8 +88,8 @@ public class Bet {
             return this;
         }
 
-        public BetBuilder match(Match match) {
-            this.match = match;
+        public BetBuilder matchHistory(MatchHistory matchHistory) {
+            this.matchHistory = matchHistory;
             return this;
         }
 
@@ -98,20 +98,18 @@ public class Bet {
             return this;
         }
 
-        public BetBuilder odds(String odds) {
+        public BetBuilder odds(Float odds) {
             this.odds = odds;
             return this;
         }
 
         public Bet build() {
-            Bet Match = new Bet();
-            Match.setId(id);
-            Match.setMatch(match);
-            Match.setPrediction(prediction);
-            Match.setOdds(odds);
-
-            return Match;
+            Bet bet = new Bet();
+            bet.setId(id);
+            bet.setMatchHistory(matchHistory);
+            bet.setPrediction(prediction);
+            bet.setOdds(odds);
+            return bet;
         }
     }
-
 }

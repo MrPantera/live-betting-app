@@ -4,26 +4,29 @@ import com.bilyoner.livebettingapp.model.entity.Match;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import static com.bilyoner.livebettingapp.model.response.MatchResponse.MatchResponseBuilder.aMatchResponse;
 import java.util.Date;
 
-public class MatchResponse {
+import static com.bilyoner.livebettingapp.model.response.MatchCreateResponse.MatchCreateResponseBuilder.aMatchResponse;
+
+public class MatchCreateResponse {
 
     private Long id;
     private String league;
     private String homeTeam;
     private String awayTeam;
     private float homeOdds;
+    private float drawOdds;
     private float awayOdds;
     private Date matchTime;
 
-    public static MatchResponse createFrom(Match match) {
+    public static MatchCreateResponse createFrom(Match match) {
         return aMatchResponse()
                 .id(match.getId())
                 .league(match.getLeague())
                 .homeTeam(match.getHomeTeam())
                 .awayTeam(match.getAwayTeam())
                 .homeOdds(match.getHomeOdds())
+                .drawOdds(match.getDrawOdds())
                 .awayOdds(match.getAwayOdds())
                 .matchTime(match.getMatchTime())
                 .build();
@@ -69,6 +72,14 @@ public class MatchResponse {
         this.homeOdds = homeOdds;
     }
 
+    public float getDrawOdds() {
+        return drawOdds;
+    }
+
+    public void setDrawOdds(float drawOdds) {
+        this.drawOdds = drawOdds;
+    }
+
     public float getAwayOdds() {
         return awayOdds;
     }
@@ -91,77 +102,84 @@ public class MatchResponse {
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        MatchResponse that = (MatchResponse) o;
+        MatchCreateResponse that = (MatchCreateResponse) o;
 
-        return new EqualsBuilder().append(getId(), that.getId()).append(getLeague(), that.getLeague()).append(getHomeTeam(), that.getHomeTeam()).append(getAwayTeam(), that.getAwayTeam()).append(getHomeOdds(), that.getHomeOdds()).append(getAwayOdds(), that.getAwayOdds()).append(getMatchTime(), that.getMatchTime()).isEquals();
+        return new EqualsBuilder().append(getHomeOdds(), that.getHomeOdds()).append(getDrawOdds(), that.getDrawOdds()).append(getAwayOdds(), that.getAwayOdds()).append(getId(), that.getId()).append(getLeague(), that.getLeague()).append(getHomeTeam(), that.getHomeTeam()).append(getAwayTeam(), that.getAwayTeam()).append(getMatchTime(), that.getMatchTime()).isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(getId()).append(getLeague()).append(getHomeTeam()).append(getAwayTeam()).append(getHomeOdds()).append(getAwayOdds()).append(getMatchTime()).toHashCode();
+        return new HashCodeBuilder(17, 37).append(getId()).append(getLeague()).append(getHomeTeam()).append(getAwayTeam()).append(getHomeOdds()).append(getDrawOdds()).append(getAwayOdds()).append(getMatchTime()).toHashCode();
     }
 
-    public static final class MatchResponseBuilder {
+    public static final class MatchCreateResponseBuilder {
         private Long id;
         private String league;
         private String homeTeam;
         private String awayTeam;
         private float homeOdds;
+        private float drawOdds;
         private float awayOdds;
         private Date matchTime;
 
-        private MatchResponseBuilder() {
+        private MatchCreateResponseBuilder() {
         }
 
-        public static MatchResponseBuilder aMatchResponse() {
-            return new MatchResponseBuilder();
+        public static MatchCreateResponseBuilder aMatchResponse() {
+            return new MatchCreateResponseBuilder();
         }
 
-        public MatchResponseBuilder id(Long id) {
+        public MatchCreateResponseBuilder id(Long id) {
             this.id = id;
             return this;
         }
-        public MatchResponseBuilder league(String league) {
+
+        public MatchCreateResponseBuilder league(String league) {
             this.league = league;
             return this;
         }
 
-        public MatchResponseBuilder homeTeam(String homeTeam) {
+        public MatchCreateResponseBuilder homeTeam(String homeTeam) {
             this.homeTeam = homeTeam;
             return this;
         }
 
-        public MatchResponseBuilder awayTeam(String awayTeam) {
+        public MatchCreateResponseBuilder awayTeam(String awayTeam) {
             this.awayTeam = awayTeam;
             return this;
         }
 
-        public MatchResponseBuilder homeOdds(float homeOdds) {
+        public MatchCreateResponseBuilder homeOdds(float homeOdds) {
             this.homeOdds = homeOdds;
             return this;
         }
 
-        public MatchResponseBuilder awayOdds(float awayOdds) {
+        public MatchCreateResponseBuilder drawOdds(float drawOdds) {
+            this.drawOdds = drawOdds;
+            return this;
+        }
+
+        public MatchCreateResponseBuilder awayOdds(float awayOdds) {
             this.awayOdds = awayOdds;
             return this;
         }
 
-        public MatchResponseBuilder matchTime(Date matchTime) {
+        public MatchCreateResponseBuilder matchTime(Date matchTime) {
             this.matchTime = matchTime;
             return this;
         }
 
-        public MatchResponse build() {
-            MatchResponse matchResponse = new MatchResponse();
-            matchResponse.setId(id);
-            matchResponse.setLeague(league);
-            matchResponse.setHomeTeam(homeTeam);
-            matchResponse.setAwayTeam(awayTeam);
-            matchResponse.setHomeOdds(homeOdds);
-            matchResponse.setAwayOdds(awayOdds);
-            matchResponse.setMatchTime(matchTime);
-
-            return matchResponse;
+        public MatchCreateResponse build() {
+            MatchCreateResponse matchCreateResponse = new MatchCreateResponse();
+            matchCreateResponse.setId(id);
+            matchCreateResponse.setLeague(league);
+            matchCreateResponse.setHomeTeam(homeTeam);
+            matchCreateResponse.setAwayTeam(awayTeam);
+            matchCreateResponse.setHomeOdds(homeOdds);
+            matchCreateResponse.setDrawOdds(drawOdds);
+            matchCreateResponse.setAwayOdds(awayOdds);
+            matchCreateResponse.setMatchTime(matchTime);
+            return matchCreateResponse;
         }
     }
 }
